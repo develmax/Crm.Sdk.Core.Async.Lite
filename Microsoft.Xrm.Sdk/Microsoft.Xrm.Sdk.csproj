@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ProxySerializationSurrogate.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.ServiceModel.Http" Version="6.0.0" />
+	<PackageReference Include="System.Formats.Asn1" Version="6.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>Microsoft.Xrm.Sdk.OData</PackageId>
+    <Authors>Microsoft.Xrm.Sdk.OData</Authors>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <RepositoryUrl></RepositoryUrl>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Crm.Sdk.Core.Lite</id>
+    <version>6.1.5</version>
+    <authors>Maksim Moiseev</authors>
+    <!--<license type="expression">MIT</license>-->
+    <!--<licenseUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/LICENSE.md</licenseUrl>-->
+    <license type="file">licenses\license.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <owners>develmax</owners>
+    <icon>images\icon.png</icon>
+    <!--<iconUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/Crm.Sdk.Core.Async.Lite.Package/icon.png</iconUrl>-->
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Microsoft CRM through SDK for .NET Core (with async code)</description>
+    <releaseNotes>Release package (add ntlm based http handler and add odata client)</releaseNotes>
+    <tags>dynamics crm sdk core</tags>
+    <repository type="git" url="https://github.com/develmax/Crm.Sdk.Core.Async.Lite.git" />
+    <projectUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite</projectUrl>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="System.ServiceModel.Http" version="4.10.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\net6.0\Microsoft.Xrm.Sdk.dll" target="lib\net6.0\Microsoft.Xrm.Sdk.dll" />
+    <file src="icon.png" target="images\" />
+    <file src="license.txt" target="licenses\" />
+  </files>
+</package>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--<NoBuild>true</NoBuild>-->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NuspecFile>Crm.Sdk.Core.Async.Lite.Package.nuspec</NuspecFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xrm.Sdk\Microsoft.Xrm.Sdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="license.txt" Pack="true" PackagePath="licenses" />
+    <None Include="icon.png" Pack="true" PackagePath="images" />
+  </ItemGroup>
+</Project>
