@@ -1,7 +1,6 @@
-using Microsoft.Crm.Sdk.OData.Messages;
 using Microsoft.Xrm.Sdk;
 
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public sealed class SearchRequest : OrganizationRequest
 {

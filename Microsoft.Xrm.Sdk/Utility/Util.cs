@@ -1,15 +1,13 @@
-﻿using Microsoft.Crm.Sdk.OData.Messages;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Metadata.Query;
 using Microsoft.Xrm.Sdk.Query;
-
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
-using System.Globalization;
 
 namespace Microsoft.Xrm.Sdk.Utility
 {

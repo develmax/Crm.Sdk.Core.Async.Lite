@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Crm.Sdk.OData;
+﻿namespace Microsoft.Crm.Sdk;
 
 public static class UserSettingsFullNameConventionCode
 {

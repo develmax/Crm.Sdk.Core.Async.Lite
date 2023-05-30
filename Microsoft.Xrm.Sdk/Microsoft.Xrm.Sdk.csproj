@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -18,8 +18,8 @@
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageId>Microsoft.Xrm.Sdk.OData</PackageId>
-    <Authors>Microsoft.Xrm.Sdk.OData</Authors>
+    <PackageId>Microsoft.Xrm.Sdk</PackageId>
+    <Authors>Microsoft.Xrm.Sdk</Authors>
     <PackageReleaseNotes></PackageReleaseNotes>
     <RepositoryUrl></RepositoryUrl>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

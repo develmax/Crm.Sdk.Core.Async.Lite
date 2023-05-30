@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Utility;
 
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public sealed class RescheduleResponse : OrganizationResponse
 {

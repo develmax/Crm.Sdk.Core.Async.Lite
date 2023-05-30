@@ -1,11 +1,10 @@
 using System;
 using System.Text;
 using System.Xml.Linq;
-using Microsoft.Crm.Sdk.OData.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Utility;
 
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public sealed class PrincipalAccess
 {

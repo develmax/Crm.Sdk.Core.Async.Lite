@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xrm.Sdk.Utility;
 
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public sealed class AppointmentsToIgnore
 {

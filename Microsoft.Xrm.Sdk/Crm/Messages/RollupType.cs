@@ -1,4 +1,4 @@
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public enum RollupType
 {

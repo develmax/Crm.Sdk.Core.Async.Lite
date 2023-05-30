@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Crm.Sdk.OData.Messages;
 using Microsoft.Xrm.Sdk.Utility;
 
-namespace Microsoft.Crm.Sdk.OData.Messages;
+namespace Microsoft.Crm.Sdk.Messages;
 
 public sealed class AppointmentRequest
 {
