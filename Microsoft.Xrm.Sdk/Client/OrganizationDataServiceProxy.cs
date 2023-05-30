@@ -75,6 +75,8 @@ namespace Microsoft.Xrm.Sdk.Client
                     byte[] resultbytes = Encoding.UTF8.GetBytes(response.Content.ReadAsStringAsync().Result);
                     using (MemoryStream ms = new MemoryStream())
                     {
+                        ms.Write(resultbytes);
+                        ms.Seek(0, SeekOrigin.Begin);
                         result = (Entity)jasonSerializer.ReadObject(ms);
                     }
                     return result.Id;

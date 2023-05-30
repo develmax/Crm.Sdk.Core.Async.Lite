@@ -443,9 +443,7 @@ namespace Microsoft.Xrm.Sdk.Client
             }
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            if (Timeout > 0)
-                httpClient.Timeout = new TimeSpan(0, 0, 0, Timeout, 0);
+            httpClient.Timeout = Timeout;
             // Finish setting up the HTTP request.
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, ServiceUrl + webEndpoint);
             req.Headers.Add("SOAPAction", SOAPAction);

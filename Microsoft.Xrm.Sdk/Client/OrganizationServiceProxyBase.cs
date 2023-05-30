@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk.NtlmHttp;
+﻿using System;
+using Microsoft.Xrm.Sdk.NtlmHttp;
 using System.Net;
 using System.Net.Http;
 
@@ -8,12 +9,17 @@ namespace Microsoft.Xrm.Sdk.Client
     {
         #region class members
 
-        protected OrganizationServiceProxyBase(string serviceUrl)
+        private OrganizationServiceProxyBase()
+        {
+            Timeout = new TimeSpan(0, 0, 2, 0);
+        }
+
+        protected OrganizationServiceProxyBase(string serviceUrl) : this()
         {
             ServiceUrl = serviceUrl;
         }
 
-        protected OrganizationServiceProxyBase(string serviceUrl, NetworkCredential credential)
+        protected OrganizationServiceProxyBase(string serviceUrl, NetworkCredential credential) : this()
         {
             ServiceUrl = serviceUrl;
             Credential = credential;
@@ -21,7 +27,7 @@ namespace Microsoft.Xrm.Sdk.Client
 
         public string ServiceUrl { get; set; }
         public string AccessToken { get; set; } // can be private, but not sure if user want to access it.
-        public int Timeout { get; set; }
+        public TimeSpan Timeout { get; set; }
         public NetworkCredential Credential { get; set; }
         public bool UseProxy { get; set; }
 
