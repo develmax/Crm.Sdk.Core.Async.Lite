@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Crm.Sdk.Core</id>
-    <version>10.1.5</version>
+    <version>10.2.5</version>
     <authors>Maksim Moiseev</authors>
     <!--<license type="expression">MIT</license>-->
     <!--<licenseUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/LICENSE.md</licenseUrl>-->

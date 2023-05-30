@@ -5,7 +5,7 @@ using Microsoft.Xrm.Sdk.Query;
 
 namespace Microsoft.Xrm.Sdk;
 
-interface IOrganizationService
+public interface IOrganizationService
 {
     Task<Guid> CreateAsync(Entity entity, CancellationToken cancellationToken);
 
