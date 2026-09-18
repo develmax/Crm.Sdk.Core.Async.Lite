@@ -163,6 +163,69 @@ public class TransportTests
     }
 #else
     [Fact]
+    public async Task LiteTimeoutCanChangeBetweenCallsWithoutLosingConnection()
+    {
+        var id = Guid.NewGuid();
+        using var server = new LoopbackServer(_ => Task.FromResult(new Reply(200, Soap(id))));
+        using var proxy = new OrganizationServiceProxy(server.Url);
+        using var completed = new CancellationTokenSource();
+        proxy.Timeout = TimeSpan.FromSeconds(5);
+        Assert.Equal(id, await proxy.CreateAsync(new Entity("account"), completed.Token));
+        completed.Cancel();
+        proxy.Timeout = TimeSpan.FromSeconds(10);
+        Assert.Equal(id, await proxy.CreateAsync(new Entity("account"), CancellationToken.None));
+        proxy.Timeout = TimeSpan.FromSeconds(5);
+        Assert.Equal(id, await proxy.CreateAsync(new Entity("account"), CancellationToken.None));
+        Assert.Equal(3, server.Requests.Count);
+        Assert.Single(server.Requests.Select(r => r.Connection).Distinct());
+        Assert.All(server.Requests, r => Assert.DoesNotContain("cancellationToken", r.Body));
+    }
+
+    [Fact]
+    public async Task LitePreCancellationDoesNotSendCreate()
+    {
+        using var server = new LoopbackServer(_ => Task.FromResult(new Reply(200, Soap(Guid.NewGuid()))));
+        using var proxy = new OrganizationServiceProxy(server.Url);
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => proxy.CreateAsync(new Entity("account"), new CancellationToken(true)));
+        Assert.Empty(server.Requests);
+    }
+
+    [Fact]
+    public async Task LiteTimeoutDoesNotReplayCreate()
+    {
+        using var server = new LoopbackServer(async _ => { await Task.Delay(1000); return new Reply(200, Soap(Guid.NewGuid())); });
+        using var proxy = new OrganizationServiceProxy(server.Url) { Timeout = TimeSpan.FromMilliseconds(200) };
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => proxy.CreateAsync(new Entity("account"), CancellationToken.None));
+        Assert.Single(server.Requests);
+    }
+
+    [Fact]
+    public async Task LiteCancellationDuringCreateDoesNotReplayItAndAllowsNextCall()
+    {
+        var received = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var id = Guid.NewGuid();
+        var count = 0;
+        using var server = new LoopbackServer(async _ =>
+        {
+            if (Interlocked.Increment(ref count) == 1)
+            {
+                received.TrySetResult(true);
+                await Task.Delay(1000);
+            }
+            return new Reply(200, Soap(id));
+        });
+        using var proxy = new OrganizationServiceProxy(server.Url) { Timeout = TimeSpan.FromSeconds(5) };
+        using var cancellation = new CancellationTokenSource();
+        var pending = proxy.CreateAsync(new Entity("account"), cancellation.Token);
+        await received.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => pending);
+        Assert.Single(server.Requests);
+        Assert.Equal(id, await proxy.CreateAsync(new Entity("account"), CancellationToken.None));
+        Assert.Equal(2, server.Requests.Count);
+    }
+
+    [Fact]
     public async Task LiteProxyKeepsConnectionBetweenCreatesAndDisposesTransport()
     {
         var id = Guid.NewGuid();
