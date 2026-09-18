@@ -17,11 +17,21 @@ ADFS, Live ID and Dynamics 365 Online authentication are not implemented.
 ## Full SDK alternative
 
 [Crm.Sdk.Core.Async](https://github.com/develmax/Crm.Sdk.Core.Async)
-provides the Full SDK, including the WCF client, message assemblies and OData
-client. Its NuGet package ID is `Crm.Sdk.Core`.
-Choose this Lite package (`DevelKit.Crm.Sdk.Lite`) when you want direct
-SOAP-over-HTTP without WCF and fewer dependencies. Lite does not guarantee faster
-CRM requests. Use one variant per application: their assembly names overlap.
+(package `Crm.Sdk.Core`) includes the WCF SDK and a similar direct SOAP-over-HTTP
+implementation through `Microsoft.Xrm.Sdk.OData.OrganizationDataWebServiceProxy`.
+If you already use Full, this client is available in its `Microsoft.Xrm.Sdk.OData`
+assembly, with separate types in that namespace.
+
+This Lite package (`DevelKit.Crm.Sdk.Lite`) provides direct SOAP-over-HTTP with
+familiar SDK namespaces and class names, including `Microsoft.Xrm.Sdk.Entity`
+and `Microsoft.Xrm.Sdk.Client.OrganizationServiceProxy`, without WCF dependencies
+or WCF channel infrastructure. Lite does not guarantee faster CRM requests.
+
+The `Microsoft.Xrm.Sdk.OData` assembly may be removed from Full in a future release,
+with the direct HTTP implementation maintained only in Lite. This is a possible
+direction, not an announced removal; no removal version or date has been set.
+
+Use one package variant per application: their assembly names overlap.
 
 ## Framework compatibility
 
