@@ -14,6 +14,15 @@ The 11.0.0 release is prepared in this repository; the package owner publishes i
 to NuGet separately. Until then, use the generated nupkg from a local feed.
 ADFS, Live ID and Dynamics 365 Online authentication are not implemented.
 
+## Full SDK alternative
+
+[Crm.Sdk.Core.Async](https://github.com/develmax/Crm.Sdk.Core.Async)
+provides the Full SDK, including the WCF client, message assemblies and OData
+client. Its NuGet package ID is `Crm.Sdk.Core`.
+Choose this Lite package (`DevelKit.Crm.Sdk.Lite`) when you want direct
+SOAP-over-HTTP without WCF and fewer dependencies. Lite does not guarantee faster
+CRM requests. Use one variant per application: their assembly names overlap.
+
 ## Framework compatibility
 
 | Consumer | Selected package assets |
