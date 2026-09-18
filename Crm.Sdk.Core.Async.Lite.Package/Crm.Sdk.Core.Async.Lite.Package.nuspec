@@ -1,31 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>Crm.Sdk.Core</id>
-    <version>10.3.0</version>
+    <id>Crm.Sdk.Core.Lite</id>
+    <version>11.0.0</version>
     <authors>Maksim Moiseev</authors>
-    <!--<license type="expression">MIT</license>-->
-    <!--<licenseUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/LICENSE.md</licenseUrl>-->
-    <license type="file">licenses\license.txt</license>
-    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
-    <owners>develmax</owners>
-    <icon>images\icon.png</icon>
-    <!--<iconUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/Crm.Sdk.Core.Async.Lite.Package/icon.png</iconUrl>-->
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>Microsoft CRM through SDK for .NET Core (with async code)</description>
-    <releaseNotes>Release package (add ntlm based http handler and add odata client)</releaseNotes>
-    <tags>dynamics crm sdk core</tags>
+    <license type="file">licenses/license.txt</license>
+    <icon>images/icon.png</icon>
+    <readme>README.md</readme>
+    <description>Async SDK for Microsoft Dynamics CRM on-premises with pooled NTLM authentication. .NET Core 2.1 through .NET 10.</description>
+    <releaseNotes>Reuse authenticated transport pools; local cancellation and timeout safety; .NET Standard 2.0 and .NET 6-10 assets. See README for migration and runtime requirements.</releaseNotes>
+    <tags>dynamics crm sdk core async ntlm</tags>
     <repository type="git" url="https://github.com/develmax/Crm.Sdk.Core.Async.Lite.git" />
     <projectUrl>https://github.com/develmax/Crm.Sdk.Core.Async.Lite</projectUrl>
     <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
+      </group>
       <group targetFramework="net6.0">
-        <dependency id="System.ServiceModel.Http" version="4.10.0" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
+      </group>
+      <group targetFramework="net7.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
+      </group>
+      <group targetFramework="net10.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="System.Memory" version="4.5.5" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\net6.0\Microsoft.Xrm.Sdk.dll" target="lib\net6.0\Microsoft.Xrm.Sdk.dll" />
-    <file src="icon.png" target="images\" />
-    <file src="license.txt" target="licenses\" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\netstandard2.0\Microsoft.Xrm.Sdk.dll" target="lib\netstandard2.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\netstandard2.0\Microsoft.Crm.Sdk.dll" target="lib\netstandard2.0" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\net6.0\Microsoft.Xrm.Sdk.dll" target="lib\net6.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\net6.0\Microsoft.Crm.Sdk.dll" target="lib\net6.0" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\net7.0\Microsoft.Xrm.Sdk.dll" target="lib\net7.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\net7.0\Microsoft.Crm.Sdk.dll" target="lib\net7.0" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\net8.0\Microsoft.Xrm.Sdk.dll" target="lib\net8.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\net8.0\Microsoft.Crm.Sdk.dll" target="lib\net8.0" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\net9.0\Microsoft.Xrm.Sdk.dll" target="lib\net9.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\net9.0\Microsoft.Crm.Sdk.dll" target="lib\net9.0" />
+    <file src="..\Microsoft.Xrm.Sdk\bin\Release\net10.0\Microsoft.Xrm.Sdk.dll" target="lib\net10.0" />
+    <file src="..\Microsoft.Crm.Sdk\bin\Release\net10.0\Microsoft.Crm.Sdk.dll" target="lib\net10.0" />
+    <file src="icon.png" target="images" />
+    <file src="license.txt" target="licenses" />
+    <file src="..\README.md" target="" />
   </files>
 </package>

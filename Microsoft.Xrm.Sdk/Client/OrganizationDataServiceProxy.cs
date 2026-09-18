@@ -1,4 +1,4 @@
-﻿using Microsoft.Xrm.Sdk.Query;
+using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -72,10 +72,10 @@ namespace Microsoft.Xrm.Sdk.Client
                 {
                     Entity result;
                     // Deserialize response to JToken 
-                    byte[] resultbytes = Encoding.UTF8.GetBytes(response.Content.ReadAsStringAsync().Result);
+                    byte[] resultbytes = Encoding.UTF8.GetBytes(await response.Content.ReadAsStringAsync());
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        ms.Write(resultbytes);
+                        ms.Write(resultbytes, 0, resultbytes.Length);
                         ms.Seek(0, SeekOrigin.Begin);
                         result = (Entity)jasonSerializer.ReadObject(ms);
                     }
@@ -162,7 +162,7 @@ namespace Microsoft.Xrm.Sdk.Client
                             throw new Exception("Early-bound types must be enabled for a REST Retrieve.");
                     }
                     // Deserialize response to JToken 
-                    JToken jtoken = JObject.Parse(response.Content.ReadAsStringAsync().Result)["d"];
+                    JToken jtoken = JObject.Parse(await response.Content.ReadAsStringAsync())["d"];
                     return (Entity)JsonConvert.DeserializeObject(jtoken.ToString(), currentType.AsType());
                 }
                 else
@@ -221,7 +221,7 @@ namespace Microsoft.Xrm.Sdk.Client
                     }
 
                     // Deserialize response to JToken IList
-                    IList<JToken> jTokens = JObject.Parse(response.Content.ReadAsStringAsync().Result)["d"]["results"].Children().ToList();
+                    IList<JToken> jTokens = JObject.Parse(await response.Content.ReadAsStringAsync())["d"]["results"].Children().ToList();
                     foreach (JToken jToken in jTokens)
                     {
                         // Deserialize result to Type T

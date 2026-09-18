@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net10.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <!--<NoBuild>true</NoBuild>-->
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NuspecFile>Crm.Sdk.Core.Async.Lite.Package.nuspec</NuspecFile>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Xrm.Sdk\Microsoft.Xrm.Sdk.csproj" />
+    <ProjectReference Include="..\Microsoft.Xrm.Sdk\Microsoft.Xrm.Sdk.csproj" /><ProjectReference Include="..\Microsoft.Crm.Sdk\Microsoft.Crm.Sdk.csproj" />
   </ItemGroup>
 
   <ItemGroup>

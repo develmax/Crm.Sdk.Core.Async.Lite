@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
+/* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
    rights reserved.
 
    License to copy and use this software is granted provided that it
@@ -253,7 +253,7 @@ namespace Microsoft.Xrm.Sdk.NtlmHttp
 
             for (i = 0, j = 0; j < len; i++, j += 4)
             {
-                output[i] = BitConverter.ToUInt32(input.Slice(j));
+                output[i] = System.Buffers.Binary.BinaryPrimitives.ReadUInt32LittleEndian(input.Slice(j, 4));
             }
         }
 

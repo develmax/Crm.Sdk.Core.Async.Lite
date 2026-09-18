@@ -1,72 +1,92 @@
 # Crm.Sdk.Core.Async.Lite
 
-![Logo of the project](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/blob/master/Crm.Sdk.Core.Async.Lite.Package/icon.png)
+Async SDK for Microsoft Dynamics CRM on-premises, including CRM 2015.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/develmax/crm.sdk.core.async.lite/badge)](https://www.codefactor.io/repository/github/develmax/crm.sdk.core.async.lite)
-[![Travis build status](https://api.travis-ci.com/develmax/Crm.Sdk.Core.Async.Lite.svg?branch=master)](https://travis-ci.com/github/develmax/Crm.Sdk.Core.Async.Lite?branch=master)
-[![NuGet Status](https://img.shields.io/nuget/v/Crm.Sdk.Core.Lite.svg?style=flat)](https://www.nuget.org/packages/Crm.Sdk.Core.Lite/) (6.X versions)
+[![NuGet](https://img.shields.io/nuget/v/Crm.Sdk.Core.Lite.svg)](https://www.nuget.org/packages/Crm.Sdk.Core.Lite/)
 
-This project was created to port the official libraries Microsoft.Xrm.Sdk and Microsoft.Crm.Sdk to work with Microsoft Dynamics CRM 2015 (and etc.) via API from .NET Core 6.0 platform. This package does not include authentication via adfs, liveid, dynamics crm365.
-
-## Installing / Getting started
-
-Crm.Sdk.Core.Async.Lite is available from NuGet
+## Install
 
 ```shell
-dotnet package install Crm.Sdk.Core --version 6.1.5
+dotnet add package Crm.Sdk.Core.Lite --version 11.0.0
 ```
 
-You can also use your favorite NuGet client.
+The 11.0.0 release is prepared in this repository; the package owner publishes it
+to NuGet separately. Until then, use the generated nupkg from a local feed.
+ADFS, Live ID and Dynamics 365 Online authentication are not implemented.
 
-## Developing
+## Framework compatibility
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
+| Consumer | Selected package assets |
+| --- | --- |
+| .NET Core 2.1, 2.2, 3.0, 3.1 and .NET 5 | netstandard2.0 |
+| .NET 6, 7, 8, 9, 10 | matching net6.0 through net10.0 |
 
-```shell
-git clone https://github.com/develmax/Crm.Sdk.Core.Async.Lite.git
-cd Crm.Sdk.Core.Async.Lite
-dotnet restore
+Build with the .NET 10 SDK. Older target compatibility does not imply that those
+runtimes still receive security updates from Microsoft. Regression suites target
+.NET 6, 8, 9 and 10. Package smoke tests (serialization, two pooled SOAP calls,
+and cancellation isolation) also passed on Windows with runtimes 2.1.30, 2.2.8,
+3.0.3, 3.1.32, 5.0.17 and 7.0.20. This is local protocol validation, not a live
+CRM compatibility certification.
+
+## NTLM and connection lifetime
+
+NTLM/Negotiate authentication is performed by HttpClientHandler so the transport
+keeps the handshake on one connection and reuses authenticated sockets. The old
+manual handshake and its hidden HttpClient timeout have been removed. Credentials
+are restricted to NTLM/Negotiate on the first CRM authority; redirects are not
+followed. Configure credentials and proxy settings before the first call.
+
+Windows uses SSPI. Linux needs a working GSSAPI NTLM provider (for example the
+OS package gss-ntlmssp); validate the target container with your domain. A managed
+NTLM fallback is no longer provided. Never disable TLS validation to make a
+connection work; install the organization's trusted CA certificates instead.
+
+Keep each proxy alive for its owner's lifetime and dispose it when that owner
+stops. Lite/OData keep a handler per proxy; per-call HttpClient wrappers do not
+destroy its connection pool. Do not use a WCF proxy concurrently: lease it to one
+operation at a time. Do not mutate a NetworkCredential while it is in use.
+
+## Cancellation, timeouts and writes
+
+Cancellation is local. CRM 2015 does not accept a .NET CancellationToken as part
+of its SOAP contract. Canceling or timing out a client does **not** confirm that
+CRM rolled back a write. After dispatch, a lost response means the outcome can
+be unknown; reconcile the result before repeating a create.
+
+The Full proxy Timeout maps to WCF binding timeouts and channel OperationTimeout.
+Lite/OData use the per-call HttpClient timeout. Registration of local cancellation
+is scoped to one call and cannot abort a later pooled call. Write operations and
+generic Execute are not automatically replayed by the Full proxy after errors.
+
+CRM's standard duplicate detection can be requested with CreateRequest and
+SuppressDuplicateDetection=false. It requires enabled, published server rules
+and is not an atomic uniqueness guarantee for concurrent creates.
+
+## Version 11 migration
+
+The Lite package is now published as `Crm.Sdk.Core.Lite`. Previous repository
+packaging incorrectly used the Full package ID. Lite uses direct SOAP/HTTP and
+includes `Microsoft.Xrm.Sdk` and `Microsoft.Crm.Sdk`. Do not install both variants
+in one application: their assembly names overlap.
+
+## Build and verify
+
+```powershell
+./build.ps1
 ```
 
-Clone the repository and then restore the development requirements. You can use
-any editor, Rider, VS Code or VS 2022. The library supports all .NET Core
-platforms.
+Install .NET runtimes 6, 8, 9 and 10 to execute the test matrix. The script builds
+all target assets, runs the isolated loopback tests, compiles package consumers
+for .NET Core 2.1, 2.2, 3.0, 3.1 and .NET 5-10, and puts the nupkg in
+artifacts/. Use -SkipTests only if test execution is handled separately.
+To repeat runtime smoke tests with isolated Windows runtimes, run
+`./verify-runtimes.ps1 -RuntimeRoot <directory>`; the directory contains
+2.1/, 2.2/, 3.0/, 3.1/, 5.0/ and 7.0/ dotnet installations.
 
-### Building
-
-Building is simple
-
-```shell
-dotnet build
-```
-
-### Deploying / Publishing
-
-```shell
-git pull
-versionize
-dotnet pack
-dotnet nuget push
-git push
-```
-
-## Contributing
-
-When you publish something open source, one of the greatest motivations is that
-anyone can just jump in and start contributing to your project.
-
-These paragraphs are meant to welcome those kind souls to feel that they are
-needed. You should state something like:
-
-"If you'd like to contribute, please fork the repository and use a feature
-branch. Pull requests are warmly welcome."
-
-If there's anything else the developer needs to know (e.g. the code style
-guide), you should link it here. If there's a lot of things to take into
-consideration, it is common to separate this section to its own file called
-`CONTRIBUTING.md` (or similar). If so, you should say that it exists here.
+Tests never connect to a live CRM. The NTLM handshake test uses a native server
+challenge on .NET 8+ and checks connection affinity and request count; it is not
+a domain-credential validation test.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+MIT. See [LICENSE.md](LICENSE.md).
