@@ -2,12 +2,12 @@
 
 Async SDK for Microsoft Dynamics CRM on-premises, including CRM 2015.
 
-[![NuGet](https://img.shields.io/nuget/v/Crm.Sdk.Core.Lite.svg)](https://www.nuget.org/packages/Crm.Sdk.Core.Lite/)
+[![NuGet](https://img.shields.io/nuget/v/Crm.Sdk.CoreLite.svg)](https://www.nuget.org/packages/Crm.Sdk.CoreLite/)
 
 ## Install
 
 ```shell
-dotnet add package Crm.Sdk.Core.Lite --version 11.0.0
+dotnet add package Crm.Sdk.CoreLite --version 11.0.0
 ```
 
 The 11.0.0 release is prepared in this repository; the package owner publishes it
@@ -64,7 +64,7 @@ and is not an atomic uniqueness guarantee for concurrent creates.
 
 ## Version 11 migration
 
-The Lite package is now published as `Crm.Sdk.Core.Lite`. Previous repository
+The Lite package is prepared as `Crm.Sdk.CoreLite`. Previous repository
 packaging incorrectly used the Full package ID. Lite uses direct SOAP/HTTP and
 includes `Microsoft.Xrm.Sdk` and `Microsoft.Crm.Sdk`. Do not install both variants
 in one application: their assembly names overlap.
