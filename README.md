@@ -113,7 +113,7 @@ a domain-credential validation test.
 If this library helps you, you can support its maintenance, tests, and documentation.
 Donations are optional; the library remains freely available under the MIT license.
 
-[Patreon](https://www.patreon.com/develmax) · [Boosty](https://boosty.to/develmax/donate) · [YooMoney](https://yoomoney.ru/to/4100119529133322) · [PayPal](https://paypal.me/develmax)
+[Open Collective](https://opencollective.com/crmsdkcore) · [Patreon](https://www.patreon.com/develmax) · [Boosty](https://boosty.to/develmax/donate) · [YooMoney](https://yoomoney.ru/to/4100119529133322) · [PayPal](https://paypal.me/develmax)
 
 ## License
 
