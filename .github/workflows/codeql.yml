@@ -1,0 +1,44 @@
+name: CodeQL
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '23 5 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  analyze:
+    name: Analyze C#
+    runs-on: windows-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: csharp
+          build-mode: manual
+          queries: security-extended
+      - name: Build SDK assemblies
+        shell: pwsh
+        run: |
+          foreach ($project in Get-ChildItem -Path 'Microsoft.*/*.csproj') {
+            dotnet build $project.FullName -c Release --no-incremental --nologo -m:1 -nr:false -p:BuildInParallel=false
+            if ($LASTEXITCODE -ne 0) { throw "Build failed: $($project.Name)" }
+          }
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: '/language:csharp'
