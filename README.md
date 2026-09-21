@@ -5,6 +5,7 @@
 Async SDK for Microsoft Dynamics CRM on-premises, including CRM 2015.
 
 [![Build and test](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/build.yml)
+[![CodeQL](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/codeql.yml)
 [![NuGet](https://img.shields.io/nuget/v/DevelKit.Crm.Sdk.Lite.svg)](https://www.nuget.org/packages/DevelKit.Crm.Sdk.Lite/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/DevelKit.Crm.Sdk.Lite.svg)](https://www.nuget.org/packages/DevelKit.Crm.Sdk.Lite/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
