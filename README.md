@@ -6,19 +6,17 @@ Async SDK for Microsoft Dynamics CRM on-premises, including CRM 2015.
 
 [![Build and test](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/build.yml)
 [![CodeQL](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/develmax/Crm.Sdk.Core.Async.Lite/actions/workflows/codeql.yml)
-[![NuGet](https://img.shields.io/nuget/v/DevelKit.Crm.Sdk.Lite.svg)](https://www.nuget.org/packages/DevelKit.Crm.Sdk.Lite/)
-[![NuGet downloads](https://img.shields.io/nuget/dt/DevelKit.Crm.Sdk.Lite.svg)](https://www.nuget.org/packages/DevelKit.Crm.Sdk.Lite/)
+[![NuGet](https://img.shields.io/nuget/v/Crm.Sdk.Core.Lite.svg)](https://www.nuget.org/packages/Crm.Sdk.Core.Lite/)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Crm.Sdk.Core.Lite.svg)](https://www.nuget.org/packages/Crm.Sdk.Core.Lite/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 [![Support](https://img.shields.io/badge/Support-Open%20Collective-7FADF2.svg)](https://opencollective.com/crmsdkcore)
 
 ## Install
 
 ```shell
-dotnet add package DevelKit.Crm.Sdk.Lite --version 11.0.0
+dotnet add package Crm.Sdk.Core.Lite --version 11.0.0
 ```
 
-The 11.0.0 release is prepared in this repository; the package owner publishes it
-to NuGet separately. Until then, use the generated nupkg from a local feed.
 ADFS, Live ID and Dynamics 365 Online authentication are not implemented.
 
 ## Full SDK alternative
@@ -29,7 +27,7 @@ implementation through `Microsoft.Xrm.Sdk.OData.OrganizationDataWebServiceProxy`
 If you already use Full, this client is available in its `Microsoft.Xrm.Sdk.OData`
 assembly, with separate types in that namespace.
 
-This Lite package (`DevelKit.Crm.Sdk.Lite`) provides direct SOAP-over-HTTP with
+This Lite package (`Crm.Sdk.Core.Lite`) provides direct SOAP-over-HTTP with
 familiar SDK namespaces and class names, including `Microsoft.Xrm.Sdk.Entity`
 and `Microsoft.Xrm.Sdk.Client.OrganizationServiceProxy`, without WCF dependencies
 or WCF channel infrastructure. Lite does not guarantee faster CRM requests.
@@ -90,7 +88,7 @@ and is not an atomic uniqueness guarantee for concurrent creates.
 
 ## Version 11 migration
 
-The Lite package is prepared as `DevelKit.Crm.Sdk.Lite`. Previous repository
+The Lite package is published as `Crm.Sdk.Core.Lite`. Previous repository
 packaging incorrectly used the Full package ID. Lite uses direct SOAP/HTTP and
 includes `Microsoft.Xrm.Sdk` and `Microsoft.Crm.Sdk`. Do not install both variants
 in one application: their assembly names overlap.

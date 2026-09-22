@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>DevelKit.Crm.Sdk.Lite</id>
+    <id>Crm.Sdk.Core.Lite</id>
     <version>11.0.0</version>
     <authors>Maksim Moiseev</authors>
     <license type="file">licenses/license.txt</license>
